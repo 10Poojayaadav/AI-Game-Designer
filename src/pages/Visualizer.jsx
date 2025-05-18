@@ -262,6 +262,7 @@ const Visualizer = ({ step, setStep }) => {
             onClick={() => {
               setStep(0);
               setIsPlaying(false);
+              setExplainMode(false);
             }}
             className="px-4 py-2 bg-gray-200 text-gray-800 rounded-full hover:bg-gray-300 transition"
           >
