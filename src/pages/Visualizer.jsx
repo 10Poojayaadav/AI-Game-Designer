@@ -33,9 +33,9 @@ const Visualizer = ({ step, setStep }) => {
     return "bg-red-300";
   };
 
-  const explain = ()=>{
+  const explain = () => {
     setExplainMode(true);
-  }
+  };
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 640);
@@ -151,9 +151,19 @@ const Visualizer = ({ step, setStep }) => {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-slate-100 to-white py-10 px-6">
-      <h1 className="text-4xl font-extrabold text-center text-indigo-700 mb-12 drop-shadow-md">
-        🎲 AI Game Designer — Thought Process Visualizer
-      </h1>
+      <motion.h1
+  className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-extrabold text-center text-blue-400 drop-shadow-lg font-game px-4 leading-tight p-6"
+  initial={{ scale: 0.95, opacity: 0 }}
+  animate={{ scale: 1, opacity: 1 }}
+  transition={{ duration: 0.7, ease: "easeOut" }}
+  whileHover={{
+    scale: 1.03,
+    textShadow: "0px 0px 6px rgba(255, 255, 255, 0.8)",
+  }}
+>
+  🎲 AI Game Designer — Thought Map
+</motion.h1>
+
 
       <div className="relative">
         {/* Filters */}
@@ -203,9 +213,11 @@ const Visualizer = ({ step, setStep }) => {
                 checked={explainMode}
                 onChange={(e) => setExplainMode(e.target.checked)}
               /> */}
-              <button className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full shadow-md flex items-center gap-2"
-               onClick={explain}
-               onChange={(e) => setExplainMode(e.target.checked)}>
+              <button
+                className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full shadow-md flex items-center gap-2"
+                onClick={explain}
+                onChange={(e) => setExplainMode(e.target.checked)}
+              >
                 🎙️ Explain Mode
               </button>
             </label>

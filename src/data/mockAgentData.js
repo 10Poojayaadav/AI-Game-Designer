@@ -12,7 +12,7 @@ export const agentReasoning = [
   },
   {
     id: "2",
-    title: "Generate Game Theme Ideas",
+    title: "Generate Theme Ideas",
     description: "Player must collect 5 relics before darkness spreads.",
     type: "goal",
     confidence: 0.6,

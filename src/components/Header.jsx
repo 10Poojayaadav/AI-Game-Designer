@@ -97,7 +97,7 @@ const Header = ({ status, step }) => {
             <Download size={20} />
           </button>
           <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap z-10">
-            Download Reasoning JSON
+            Download Steps
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu } from "lucide-react"; 
+import { Menu } from "lucide-react";
 
 export default function Sidebar({ steps, currentStep, onSelectStep }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,20 +8,20 @@ export default function Sidebar({ steps, currentStep, onSelectStep }) {
     <>
       {/* Mobile Toggle Button */}
       <button
-        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-gray-800 text-white rounded-full shadow-lg"
+        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-gamePrimary text-white rounded-full shadow-xl border-2 border-white hover:bg-opacity-90"
         onClick={() => setIsOpen(!isOpen)}
       >
         <Menu size={20} />
       </button>
 
-      {/* Sidebar Panel */}
+      {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full w-64 z-40 bg-gradient-to-b from-gray-700 via-gray-800 to-gray-900 border-r border-gray-600 shadow-lg p-4 overflow-y-auto rounded-r-xl transition-transform duration-300
+        className={`fixed top-0 left-0 h-full w-64 z-40 bg-gradient-to-b from-[#2b2d42] via-[#1e213a] to-[#696464] border-r border-gray-500 shadow-xl p-5 font-game overflow-y-auto rounded-r-3xl transition-transform duration-300
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
-        md:relative md:translate-x-0 md:top-auto md:left-auto  md:h-auto md:block`}
+        md:relative md:translate-x-0 md:h-auto md:block`}
       >
-        <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-          🧠 <span>Agent Timeline</span>
+        <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3 tracking-wide drop-shadow-md">
+          🎮 <span>Agent Timeline</span>
         </h2>
 
         <ul className="space-y-2">
@@ -30,17 +30,15 @@ export default function Sidebar({ steps, currentStep, onSelectStep }) {
               key={index}
               onClick={() => {
                 onSelectStep(index);
-                setIsOpen(false); 
+                setIsOpen(false);
               }}
-              className={`cursor-pointer px-4 py-2 rounded-lg transition-all duration-200 border-l-4 ${
+              className={`cursor-pointer px-4 py-2 rounded-xl transition-all duration-200 text-sm border-l-4 font-semibold ${
                 index === currentStep
-                  ? "bg-blue-600/20 border-blue-500 text-white font-semibold"
-                  : "text-gray-300 hover:bg-gray-500/60 border-transparent hover:border-gray-500"
+                  ? "bg-gamePrimary/20 border-gamePrimary text-white"
+                  : "text-gray-300 hover:bg-white/10 border-transparent hover:border-white/20"
               }`}
             >
-              <span className="truncate block">
-                {index + 1}. {step.title}
-              </span>
+              <span className="truncate block">{step.title}</span>
             </li>
           ))}
         </ul>
