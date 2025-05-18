@@ -166,66 +166,61 @@ const Visualizer = ({ step, setStep }) => {
 
       <div className="relative">
         {/* Filters */}
-        <div className="grid gap-4 mb-6 bg-white shadow-xl rounded-2xl p-6 border border-gray-200 sm:grid-cols-2 lg:grid-cols-3">
-          {/* Tool Filter */}
-          <div className="flex flex-col">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Filter by Tool:
-            </label>
-            <select
-              className="block w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              value={toolFilter}
-              onChange={(e) => setToolFilter(e.target.value)}
-            >
-              <option value="all">All</option>
-              <option value="InitTool">InitTool</option>
-              <option value="ThemeGen">ThemeGen</option>
-              <option value="GoalGen">GoalGen</option>
-              <option value="RuleGen">RuleGen</option>
-            </select>
-          </div>
+        <div className="grid gap-4 mb-6 bg-white shadow-xl rounded-2xl p-6 border border-gray-200 md:grid-cols-3 md:items-start">
+          {/* Filter + Confidence - Left (smaller size) */}
+          <div className="flex flex-col gap-4 md:col-span-2 lg:flex-row lg:items-center">
+            {/* Tool Filter */}
+            <div className="flex flex-col w-full lg:max-w-xs">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Filter by Tool:
+              </label>
+              <select
+                className="block w-full rounded-md border border-gray-300 p-2 text-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                value={toolFilter}
+                onChange={(e) => setToolFilter(e.target.value)}
+              >
+                <option value="all">All</option>
+                <option value="InitTool">InitTool</option>
+                <option value="ThemeGen">ThemeGen</option>
+                <option value="GoalGen">GoalGen</option>
+                <option value="RuleGen">RuleGen</option>
+              </select>
+            </div>
 
-          {/* Confidence Range */}
-          <div className="flex flex-col">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Min Confidence:
-            </label>
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.05"
-              value={minConfidence}
-              onChange={(e) => setMinConfidence(parseFloat(e.target.value))}
-              className="w-full"
-            />
-            <div className="text-xs text-gray-600 mt-1 text-center">
-              Current: {(minConfidence * 100).toFixed(0)}%
+            {/* Confidence Range */}
+            <div className="flex flex-col w-full lg:max-w-xs">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Min Confidence:
+              </label>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.05"
+                value={minConfidence}
+                onChange={(e) => setMinConfidence(parseFloat(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-gray-600 mt-1 text-center">
+                Current: {(minConfidence * 100).toFixed(0)}%
+              </div>
             </div>
           </div>
 
-          {/* Narration Mode Controls */}
-          <div className="flex flex-col gap-2 justify-center">
-            <label className="flex items-center gap-2">
-              {/* <input
-                type="checkbox"
-                checked={explainMode}
-                onChange={(e) => setExplainMode(e.target.checked)}
-              /> */}
-              <button
-                className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full shadow-md flex items-center gap-2"
-                onClick={explain}
-                onChange={(e) => setExplainMode(e.target.checked)}
-              >
-                🎙️ Explain Mode
-              </button>
-            </label>
+          {/* Narration Mode - Right on desktop, center on mobile */}
+          <div className="flex flex-col items-center md:items-end gap-2 mt-4 md:mt-0">
+            <button
+              className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full shadow-md flex items-center gap-2"
+              onClick={explain}
+            >
+              🎙️ Explain Mode
+            </button>
 
             {explainMode && (
               <select
                 value={narrationType}
                 onChange={(e) => setNarrationType(e.target.value)}
-                className="border rounded px-2 py-1"
+                className="border rounded px-2 py-1 text-sm w-full md:w-auto"
               >
                 <option value="text">📝 Text</option>
                 <option value="voice">🔊 Voice</option>
@@ -235,7 +230,8 @@ const Visualizer = ({ step, setStep }) => {
         </div>
 
         {/* Controls */}
-        <div className="flex items-center flex-wrap gap-4 mb-6 justify-center">
+        <div className="flex flex-wrap gap-4 mb-6 justify-center ">
+          {/* Play/Pause */}
           <button
             onClick={() => setPlaying((p) => !p)}
             className="px-4 py-2 bg-indigo-600 text-white font-medium rounded-full shadow-md hover:bg-indigo-700 transition"
@@ -243,6 +239,7 @@ const Visualizer = ({ step, setStep }) => {
             {playing ? "Pause" : "Play"}
           </button>
 
+          {/* Back */}
           <button
             onClick={() => setStep((s) => Math.max(0, s - 1))}
             className="px-4 py-2 bg-gray-200 text-gray-800 rounded-full hover:bg-gray-300 transition"
@@ -250,6 +247,7 @@ const Visualizer = ({ step, setStep }) => {
             ⏪ Back
           </button>
 
+          {/* Forward */}
           <button
             onClick={() =>
               setStep((s) => Math.min(agentReasoning.length, s + 1))
@@ -259,17 +257,19 @@ const Visualizer = ({ step, setStep }) => {
             ⏩ Forward
           </button>
 
+          {/* Reset */}
           <button
             onClick={() => {
               setStep(0);
               setIsPlaying(false);
             }}
-            className="bg-gray-200 px-4 py-2 rounded-full hover:bg-gray-300 transition"
+            className="px-4 py-2 bg-gray-200 text-gray-800 rounded-full hover:bg-gray-300 transition"
           >
-            Reset
+            🔄 Reset
           </button>
 
-          <div className="text-sm text-gray-700 font-medium">
+          {/* Step Info */}
+          <div className="bg-gray-200 text-gray-800 px-4 py-2 rounded-full text-sm font-medium flex items-center justify-center">
             Step: {step + 1}/{agentReasoning.length}
           </div>
         </div>

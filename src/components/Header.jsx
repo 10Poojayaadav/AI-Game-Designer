@@ -3,7 +3,6 @@ import { jsPDF } from "jspdf";
 import { agentReasoning } from "../data/mockAgentData";
 
 const Header = ({ status, step }) => {
-
   console.log("Agent Reasoning Data:", agentReasoning);
 
   const downloadAsPDF = () => {
@@ -51,53 +50,54 @@ const Header = ({ status, step }) => {
     document.body.removeChild(link);
   };
   return (
-    <header className="flex flex-wrap items-center justify-between gap-4 bg-white shadow p-4 rounded-xl mb-4 border">
-      {/* Left: Avatar + Text */}
-      <div className="flex items-center gap-4 flex-1 min-w-[200px]">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/4712/4712036.png"
-          alt="Agent Avatar"
-          className="w-12 h-12 rounded-full"
-        />
-        <div>
-          <h1 className="text-xl font-bold text-gray-800">
-            🎲 AI Game Designer
-          </h1>
-          <p className="text-sm text-gray-500">
-            Designing a board game in real-time...
-          </p>
+    <header className="w-full bg-gradient-to-r from-gray-700 via-gray-700 to-blue-800 text-white shadow p-8 rounded-xl mb-4 border border-gray-700">
+      {/* Responsive layout: column on small screens, row on md+ */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        {/* Center content on mobile */}
+        <div className="flex items-center gap-4 justify-center md:justify-start flex-1 min-w-[200px]">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/4712/4712036.png"
+            alt="Agent Avatar"
+            className="w-12 h-12 rounded-full"
+          />
+          <div className="text-center md:text-left">
+            <h1 className="text-xl font-bold">🎲 AI Game Designer</h1>
+            <p className="text-sm text-gray-300">
+              Designing a board game in real-time...
+            </p>
+          </div>
         </div>
-      </div>
 
-      {/* Right: Status + Download */}
-      <div className="flex items-center gap-4 flex-shrink-0">
-        {/* Status badge */}
-        <span
-          className={`text-sm px-3 py-1 rounded-full font-medium whitespace-nowrap ${
-            status === "thinking"
-              ? "bg-yellow-100 text-yellow-800"
-              : status === "idle"
-              ? "bg-gray-100 text-gray-600"
-              : "bg-green-100 text-green-700"
-          }`}
-        >
-          {status === "thinking"
-            ? "🤔 Thinking..."
-            : status === "idle"
-            ? "💤 Idle"
-            : "✅ Complete"}
-        </span>
-
-        {/* Download button with tooltip */}
-        <div className="relative group">
-          <button
-            onClick={downloadAsPDF}
-            className="p-2 bg-green-600 text-white rounded-full shadow hover:bg-green-700"
+        {/* Status + Download in separate corners on small screens */}
+        <div className="w-full md:w-auto flex justify-between md:justify-end items-center gap-4">
+          {/* Status badge */}
+          <span
+            className={`text-sm px-3 py-1 rounded-full font-medium whitespace-nowrap ${
+              status === "thinking"
+                ? "bg-yellow-100 text-yellow-800"
+                : status === "idle"
+                ? "bg-gray-100 text-gray-600"
+                : "bg-green-100 text-green-700"
+            }`}
           >
-            <Download size={20} />
-          </button>
-          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap z-10">
-            Download Steps
+            {status === "thinking"
+              ? "🤔 Thinking..."
+              : status === "idle"
+              ? "💤 Idle"
+              : "✅ Complete"}
+          </span>
+
+          {/* Download button with tooltip */}
+          <div className="relative group">
+            <button
+              onClick={downloadAsPDF}
+              className="p-2 bg-green-600 text-white rounded-full shadow hover:bg-green-700"
+            >
+              <Download size={20} />
+            </button>
+            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap z-10">
+              Download Steps
+            </div>
           </div>
         </div>
       </div>

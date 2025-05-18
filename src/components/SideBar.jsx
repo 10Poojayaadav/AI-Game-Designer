@@ -9,7 +9,7 @@ export default function Sidebar({ steps, currentStep, onSelectStep }) {
       {/* Mobile Toggle Button */}
       {!isOpen && (
         <button
-          className="md:hidden fixed top-4 left-4 z-50 p-2 bg-gamePrimary text-gray-700 hover:bg-opacity-90"
+          className="md:hidden fixed top-3 left-3 z-50 p-2 bg-gamePrimary text-gray-300  hover:bg-opacity-90"
           onClick={() => setIsOpen(true)}
         >
           <Menu size={20} />
