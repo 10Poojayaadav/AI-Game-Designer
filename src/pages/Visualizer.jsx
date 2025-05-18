@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import FlowNode from "../components/Flownode";
+import FlowNode from "../components/FlowNode";
 import ReasoningModal from "../components/ReasoningModal";
 import { agentReasoning } from "../data/mockAgentData";
 import { motion } from "framer-motion";
