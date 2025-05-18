@@ -8,7 +8,10 @@ export const agentReasoning = [
     tool: "InitTool",
     x: 100,
     y: 100,
-    alternatives: [],
+   alternatives: [
+      { value: 'Sci-Fi', confidence: 0.72 },
+      { value: 'Mystery', confidence: 0.65 }
+    ],
   },
   {
     id: "2",
