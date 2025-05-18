@@ -264,6 +264,7 @@ const Visualizer = ({ step, setStep }) => {
               setIsPlaying(false);
               setExplainMode(false);
               setPlaying(false);
+              setToolFilter("all");
             }}
             className="px-4 py-2 bg-gray-200 text-gray-800 rounded-full hover:bg-gray-300 transition"
           >
