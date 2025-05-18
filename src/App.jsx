@@ -3,8 +3,8 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import Visualizer from "./pages/Visualizer";
-import Header from "./component/Header";
-import Sidebar from "./component/SideBar";
+import Header from "./components/Header";
+import Sidebar from "./components/SideBar";
 import { agentReasoning } from "./data/mockAgentData";
 
 function App() {
