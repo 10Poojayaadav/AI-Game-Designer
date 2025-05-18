@@ -7,5 +7,8 @@ module.exports = {
   theme: {
     extend: {},
   },
+  fontFamily: {
+  display: ['Fredoka', 'sans-serif'],
+},
   plugins: [],
 }

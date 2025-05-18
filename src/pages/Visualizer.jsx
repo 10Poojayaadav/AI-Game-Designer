@@ -26,6 +26,16 @@ const Visualizer = ({ step, setStep }) => {
     return () => clearInterval(interval);
   }, [playing, step]);
 
+  const getConfidenceColor = (confidence) => {
+    if (confidence >= 0.75) return "bg-green-400";
+    if (confidence >= 0.5) return "bg-yellow-300";
+    if (confidence >= 0.25) return "bg-orange-300";
+    return "bg-red-300";
+  };
+
+  const explain = ()=>{
+    setExplainMode(true);
+  }
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 640);
@@ -188,12 +198,16 @@ const Visualizer = ({ step, setStep }) => {
           {/* Narration Mode Controls */}
           <div className="flex flex-col gap-2 justify-center">
             <label className="flex items-center gap-2">
-              <input
+              {/* <input
                 type="checkbox"
                 checked={explainMode}
                 onChange={(e) => setExplainMode(e.target.checked)}
-              />
-              <span className="text-gray-700 font-medium">Explain Mode</span>
+              /> */}
+              <button className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full shadow-md flex items-center gap-2"
+               onClick={explain}
+               onChange={(e) => setExplainMode(e.target.checked)}>
+                🎙️ Explain Mode
+              </button>
             </label>
 
             {explainMode && (
@@ -280,12 +294,18 @@ const Visualizer = ({ step, setStep }) => {
                 <div className="text-xs text-gray-600 text-right mt-1">
                   Confidence: {(node.confidence * 100).toFixed(0)}%
                 </div>
-                <FlowNode
-                  id={`node-${node.id}`}
-                  title={node.title}
-                  description={node.description}
-                  confidence={node.confidence}
-                />
+                <div
+                  className={`rounded-2xl p-4 shadow-md border transition hover:scale-105 duration-300 ${getConfidenceColor(
+                    node.confidence
+                  )}`}
+                >
+                  <FlowNode
+                    id={`node-${node.id}`}
+                    title={node.title}
+                    description={node.description}
+                    confidence={node.confidence}
+                  />
+                </div>
               </motion.div>
             ))}
 
