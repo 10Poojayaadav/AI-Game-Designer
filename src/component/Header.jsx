@@ -1,0 +1,104 @@
+import { Download } from "lucide-react";
+import { jsPDF } from "jspdf";
+
+const Header = ({ status, step, agentReasoning }) => {
+  const downloadAsPDF = () => {
+    const doc = new jsPDF();
+    doc.setFontSize(14);
+    doc.text("AI Game Designer — Thought Process", 10, 10);
+
+    let y = 20;
+
+    if (!agentReasoning || agentReasoning.length === 0) {
+      doc.text("No data to display", 10, y);
+    } else {
+      agentReasoning.forEach((node, index) => {
+        doc.setFont("helvetica", "bold");
+        doc.text(`${index + 1}. ${node.title}`, 10, y);
+        y += 8;
+
+        doc.setFont("helvetica", "normal");
+        doc.text(`Description: ${node.description}`, 10, y);
+        y += 8;
+
+        doc.text(`Confidence: ${node.confidence.toString()}`, 10, y);
+        y += 12;
+
+        if (y > 270) {
+          doc.addPage();
+          y = 20;
+        }
+      });
+    }
+
+    doc.save("ai_game_designer_steps.pdf");
+  };
+
+  const handleDownloadJSON = () => {
+    const dataStr = JSON.stringify(agentReasoning, null, 2);
+    const blob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "agent_reasoning.json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  return (
+    <header className="flex flex-wrap items-center justify-between gap-4 bg-white shadow p-4 rounded-xl mb-4 border">
+      {/* Left: Avatar + Text */}
+      <div className="flex items-center gap-4 flex-1 min-w-[200px]">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/4712/4712036.png"
+          alt="Agent Avatar"
+          className="w-12 h-12 rounded-full"
+        />
+        <div>
+          <h1 className="text-xl font-bold text-gray-800">
+            🎲 AI Game Designer
+          </h1>
+          <p className="text-sm text-gray-500">
+            Designing a board game in real-time...
+          </p>
+        </div>
+      </div>
+
+      {/* Right: Status + Download */}
+      <div className="flex items-center gap-4 flex-shrink-0">
+        {/* Status badge */}
+        <span
+          className={`text-sm px-3 py-1 rounded-full font-medium whitespace-nowrap ${
+            status === "thinking"
+              ? "bg-yellow-100 text-yellow-800"
+              : status === "idle"
+              ? "bg-gray-100 text-gray-600"
+              : "bg-green-100 text-green-700"
+          }`}
+        >
+          {status === "thinking"
+            ? "🤔 Thinking..."
+            : status === "idle"
+            ? "💤 Idle"
+            : "✅ Complete"}
+        </span>
+
+        {/* Download button with tooltip */}
+        <div className="relative group">
+          <button
+            onClick={downloadAsPDF}
+            className="p-2 bg-green-600 text-white rounded-full shadow hover:bg-green-700"
+          >
+            <Download size={20} />
+          </button>
+          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap z-10">
+            Download Reasoning JSON
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
