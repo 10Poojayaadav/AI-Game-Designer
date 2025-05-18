@@ -26,7 +26,6 @@ function App() {
           <Header
             status={status}
             step={step}
-            agentReasoning={agentReasoning.slice(0, step)}
           />
           <Visualizer step={step} setStep={setStep} />
         </main>

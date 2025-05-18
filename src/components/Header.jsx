@@ -1,7 +1,11 @@
 import { Download } from "lucide-react";
 import { jsPDF } from "jspdf";
+import { agentReasoning } from "../data/mockAgentData";
 
-const Header = ({ status, step, agentReasoning }) => {
+const Header = ({ status, step }) => {
+
+  console.log("Agent Reasoning Data:", agentReasoning);
+
   const downloadAsPDF = () => {
     const doc = new jsPDF();
     doc.setFontSize(14);
