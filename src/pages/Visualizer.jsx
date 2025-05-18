@@ -263,6 +263,7 @@ const Visualizer = ({ step, setStep }) => {
               setStep(0);
               setIsPlaying(false);
               setExplainMode(false);
+              setPlaying(false);
             }}
             className="px-4 py-2 bg-gray-200 text-gray-800 rounded-full hover:bg-gray-300 transition"
           >
@@ -271,7 +272,7 @@ const Visualizer = ({ step, setStep }) => {
 
           {/* Step Info */}
           <div className="bg-gray-200 text-gray-800 px-4 py-2 rounded-full text-sm font-medium flex items-center justify-center">
-            Step: {step + 1}/{agentReasoning.length}
+            Step: {step}/{agentReasoning.length}
           </div>
         </div>
 
