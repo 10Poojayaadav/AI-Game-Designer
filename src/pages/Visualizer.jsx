@@ -152,18 +152,17 @@ const Visualizer = ({ step, setStep }) => {
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-slate-100 to-white py-10 px-6">
       <motion.h1
-  className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-extrabold text-center text-blue-400 drop-shadow-lg font-game px-4 leading-tight p-6"
-  initial={{ scale: 0.95, opacity: 0 }}
-  animate={{ scale: 1, opacity: 1 }}
-  transition={{ duration: 0.7, ease: "easeOut" }}
-  whileHover={{
-    scale: 1.03,
-    textShadow: "0px 0px 6px rgba(255, 255, 255, 0.8)",
-  }}
->
-  🎲 AI Game Designer — Thought Map
-</motion.h1>
-
+        className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-extrabold text-center text-blue-400 drop-shadow-lg font-game px-4 leading-tight p-6"
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        whileHover={{
+          scale: 1.03,
+          textShadow: "0px 0px 6px rgba(255, 255, 255, 0.8)",
+        }}
+      >
+        🎲 AI Game Designer — Thought Map
+      </motion.h1>
 
       <div className="relative">
         {/* Filters */}

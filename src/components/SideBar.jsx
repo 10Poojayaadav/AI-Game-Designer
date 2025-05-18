@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 export default function Sidebar({ steps, currentStep, onSelectStep }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,19 +7,31 @@ export default function Sidebar({ steps, currentStep, onSelectStep }) {
   return (
     <>
       {/* Mobile Toggle Button */}
-      <button
-        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-gamePrimary text-white rounded-full shadow-xl border-2 border-white hover:bg-opacity-90"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <Menu size={20} />
-      </button>
+      {!isOpen && (
+        <button
+          className="md:hidden fixed top-4 left-4 z-50 p-2 bg-gamePrimary text-gray-700 hover:bg-opacity-90"
+          onClick={() => setIsOpen(true)}
+        >
+          <Menu size={20} />
+        </button>
+      )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full w-64 z-40 bg-gradient-to-b from-[#2b2d42] via-[#1e213a] to-[#696464] border-r border-gray-500 shadow-xl p-5 font-game overflow-y-auto rounded-r-3xl transition-transform duration-300
+        className={`fixed top-0 left-0 h-full w-64 z-40 bg-gradient-to-b from-[#2b2d42] via-[#1e213a] to-[#121212] border-r border-gray-700 shadow-xl p-5 font-game overflow-y-auto rounded-r-3xl transition-transform duration-300
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
         md:relative md:translate-x-0 md:h-auto md:block`}
       >
+        {/* Close Button (only mobile) */}
+        <div className="md:hidden flex justify-end mb-4">
+          <button
+            className="text-white p-2 bg-red-500 rounded-full hover:bg-red-600 shadow-lg"
+            onClick={() => setIsOpen(false)}
+          >
+            <X size={20} />
+          </button>
+        </div>
+
         <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3 tracking-wide drop-shadow-md">
           🎮 <span>Agent Timeline</span>
         </h2>
